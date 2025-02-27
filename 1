@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de E-mail</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Gerador de E-mail</h2>
+        <form id="emailForm">
+            <label>Seu E-mail:</label>
+            <input type="email" id="from" required>
+
+            <label>Destinatários:</label>
+            <input type="text" id="to" placeholder="email1@exemplo.com, email2@exemplo.com" required>
+
+            <label>Assunto:</label>
+            <input type="text" id="subject">
+
+            <label>Corpo do Texto:</label>
+            <textarea id="body" rows="5"></textarea>
+
+            <label>Anexos:</label>
+            <input type="file" id="attachments" multiple>
+
+            <button type="button" onclick="generateMailto()">Gerar Link</button>
+        </form>
+
+        <p id="mailtoLink"></p>
+    </div>
+
+    <script>
+        function generateMailto() {
+            const to = document.getElementById("to").value;
+            const subject = encodeURIComponent(document.getElementById("subject").value);
+            const body = encodeURIComponent(document.getElementById("body").value);
+            
+            let mailto = `mailto:${to}?subject=${subject}&body=${body}`;
+            
+            document.getElementById("mailtoLink").innerHTML = `<a href="${mailto}" class="email-link">📧 Abrir E-mail</a>`;
+        }
+    </script>
+</body>
+</html>
